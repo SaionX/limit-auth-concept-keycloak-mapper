@@ -1,5 +1,6 @@
 package es.limit.auth;
 
+import org.jboss.resteasy.spi.HttpRequest;
 import org.keycloak.models.ClientSessionContext;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.ProtocolMapperModel;
@@ -85,13 +86,21 @@ public class LimitAuthConceptKeycloakMapper extends AbstractOIDCProtocolMapper i
         String identificador = null;
         String empresa = null;
 
-        List<String> identificadors = keycloakSession.getContext().getRequestHeaders().getRequestHeader("limit-identificador");
-        if (identificadors != null && !identificadors.isEmpty())
-            identificador = identificadors.get(0);
+        HttpRequest req = keycloakSession.getContext().getContextObject(HttpRequest.class);
+        List<String> p_identificador = req.getFormParameters().get("limit-identificador");
+        if (p_identificador != null && !p_identificador.isEmpty())
+            identificador = p_identificador.get(0);
+        List<String> p_empresa = req.getFormParameters().get("limit-empresa");
+        if (p_empresa != null && !p_empresa.isEmpty())
+            empresa = p_empresa.get(0);
 
-        List<String> empreses = keycloakSession.getContext().getRequestHeaders().getRequestHeader("limit-empresa");
-        if (empreses != null && !empreses.isEmpty())
-            empresa = empreses.get(0);
+//        List<String> identificadors = keycloakSession.getContext().getRequestHeaders().getRequestHeader("limit-identificador");
+//        if (identificadors != null && !identificadors.isEmpty())
+//            identificador = identificadors.get(0);
+//
+//        List<String> empreses = keycloakSession.getContext().getRequestHeaders().getRequestHeader("limit-empresa");
+//        if (empreses != null && !empreses.isEmpty())
+//            empresa = empreses.get(0);
 
         System.out.println("Identificador: " + identificador);
         System.out.println("Empresa: " + empresa);
