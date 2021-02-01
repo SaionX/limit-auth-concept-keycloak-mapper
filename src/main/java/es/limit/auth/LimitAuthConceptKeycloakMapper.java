@@ -94,16 +94,8 @@ public class LimitAuthConceptKeycloakMapper extends AbstractOIDCProtocolMapper i
         if (p_empresa != null && !p_empresa.isEmpty())
             empresa = p_empresa.get(0);
 
-//        List<String> identificadors = keycloakSession.getContext().getRequestHeaders().getRequestHeader("limit-identificador");
-//        if (identificadors != null && !identificadors.isEmpty())
-//            identificador = identificadors.get(0);
-//
-//        List<String> empreses = keycloakSession.getContext().getRequestHeaders().getRequestHeader("limit-empresa");
-//        if (empreses != null && !empreses.isEmpty())
-//            empresa = empreses.get(0);
-
-        System.out.println("Identificador: " + identificador);
-        System.out.println("Empresa: " + empresa);
+//        System.out.println("Identificador: " + identificador);
+//        System.out.println("Empresa: " + empresa);
 
         Set<String> limitRols = new HashSet<>();
 
